@@ -15,8 +15,6 @@ The app can be tested online in [here]()
 
 <h2> Local testing </h2>
 
----
-
 Use the database table statements below to create needed tables to run the program. Also remember to insert your database credentials.
 In order to run the program locally you have to install Deno. [Installation guidelines for Deno](https://deno.land/manual/getting_started/installation). <br>Use version 1.11.5. You can set it by command: <code> deno upgrade --version 1.11.5 </code><br>
 
