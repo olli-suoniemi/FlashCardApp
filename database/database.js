@@ -2,10 +2,10 @@ import { Pool } from "../deps.js";
 
 const CONCURRENT_CONNECTIONS = 2;
 const connectionPool = new Pool({
-  hostname: ${{ secrect.PGHOST }},
-  database: ${{ secrect.PGDATABASE }},
-  user: ${{ secrect.PGDATABASE }},
-  password: ${{ secrect.PGPASSWORD }},
+  hostname: ${{ secrects.PGHOST }},
+  database: ${{ secrects.PGDATABASE }},
+  user: ${{ secrects.PGDATABASE }},
+  password: ${{ secrects.PGPASSWORD }},
   port: 5432,
 }, CONCURRENT_CONNECTIONS);
 
