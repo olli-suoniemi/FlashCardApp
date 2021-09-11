@@ -1,7 +1,13 @@
 import { Pool } from "../deps.js";
 
 const CONCURRENT_CONNECTIONS = 2;
-const connectionPool = new Pool({}, CONCURRENT_CONNECTIONS);
+const connectionPool = new Pool({
+  hostname: ${{ secrect.PGHOST }},
+  database: ${{ secrect.PGDATABASE }},
+  user: ${{ secrect.PGDATABASE }},
+  password: ${{ secrect.PGPASSWORD }},
+  port: 5432,
+}, CONCURRENT_CONNECTIONS);
 
 const executeQuery = async (query, ...args) => {
   const response = {};
