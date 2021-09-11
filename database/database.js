@@ -2,10 +2,10 @@ import { Pool } from "../deps.js";
 
 const CONCURRENT_CONNECTIONS = 2;
 const connectionPool = new Pool({
-  hostname: hostname,
-  database: database,
-  user: user,
-  password: password,
+  hostname: `{process.env.PGHOST}`,
+  database: `{process.env.PGDATABASE}`,
+  user: `{process.env.PGDATABASE}`,
+  password: `{process.env.PGPASSWORD}`,
   port: 5432,
 }, CONCURRENT_CONNECTIONS);
 

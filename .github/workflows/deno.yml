@@ -1,4 +1,4 @@
-name: Test and Deploy
+name: Deploy
 
 on:
   push:
@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          hostname: ${{ secrects.PGHOST }}
-          database: ${{ secrects.PGDATABASE }}
-          user: ${{ secrects.PGDATABASE }}
-          password: ${{ secrects.PGPASSWORD }}
+          PGHOST: ${{ secrects.PGHOST }}
+          PGDATABASE: ${{ secrects.PGDATABASE }}
+          PGPASSWORD: ${{ secrects.PGPASSWORD }}
