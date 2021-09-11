@@ -1,0 +1,72 @@
+<% layout("./layouts/layout.eta") %>
+</br>
+<a href="/words" class="paper-btn btn-default"><- Takaisin sanoihin</a>
+
+<div id="change_of_category">
+  <form method="POST" action="/words/<%= it.word.id %>/changeCategory">
+    <input type="text" list="categories" name="category" value="<%= it.word.category%>">
+    <datalist id="categories">
+      <% if (it.categories) { %>
+        <% if (it.categories.length > 0) { %>
+          <% it.categories.forEach((element) => { %>
+          <option value="<%= element.category %>">
+        <% })}; %>
+      <% } %>
+    </datalist>
+    <input type="submit" value="Vaihda sanan kappale">
+  </form>
+</div>
+
+<% if (it.list_of_answers) { %>
+  <% if (it.list_of_answers.length >= 1) { %>
+    <h3><%= it.word.word %> =<%= it.list_of_answers %></h3>
+  <% } else { %>
+    <h3><%= it.word.word %> = ?</h3>
+  <% } %>
+<% } %>
+
+<form method="POST" action="/words/<%= it.word.id %>/addAnswer" autocomplete="off">
+  <input type="text" list="answers" name="answer" style="display: inline;" autofocus>
+  <datalist id="answers">
+    <% if (it.words) { %>
+      <% if (it.words.length > 0) { %>
+        <% it.words.forEach((element) => { %>
+        <option value="<%= element.word %>">
+      <% })}; %>
+    <% } %>
+  </datalist>
+  <input type="submit" value="Lisää vastaus" style="display: inline;">
+</form>
+
+</br>
+
+<% if (it.list_of_answers && it.list_of_answers.length > 0) { %>
+  <form method="POST" action="/words/<%= it.word.id %>/delete">
+    <input type="hidden" name="_method" value="DELETE"> 
+    <input type="hidden" name="_token" value="the_token">
+    <input type="submit" class="paper-btn btn-danger" onclick="if (!confirm('Haluatko varmasti poistaa sanan?')) { return false }" value="Poista sana?"/>
+  </form>
+<% } else { %> 
+  <form method="POST" action="/words/<%= it.word.id %>/delete">
+    <input type="hidden" name="_method" value="DELETE"> 
+    <input type="hidden" name="_token" value="the_token">
+    <input type="submit" class="paper-btn btn-danger" value="Poista sana?"/>
+  </form>
+<% } %>
+
+
+<% if (it.answerData) { %>
+<ul>
+  <% Object.keys(it.answerData.validationErrors).forEach((attribute) => { %>
+      <% Object.values(it.answerData.validationErrors[attribute]).forEach((err) => { %>
+          <div class="row flex-spaces">
+              <input class="alert-state" id="<%=attribute%>" type="checkbox">
+              <div class="alert alert-danger dismissible">
+                  <%= err %>
+                  <label class="btn-close" for="<%=attribute%>">X</label>
+              </div>
+          </div>
+      <% }); %>
+  <% }); %>
+</ul>
+<% } %>

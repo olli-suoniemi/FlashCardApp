@@ -1,0 +1,31 @@
+<% layout('./layouts/layout.eta') %>
+</br>
+
+<% if(it.word && it.options && it.options.length >= 1) { %>
+
+    <div class="flex-container">
+        <div class="flex-item col-6 col" id="question"><button class="btn-block"> <%= it.word.word %></button></div>
+    </div>
+
+    <% it.options.forEach((option) => { %>
+        <div class="flex-container">
+            <div class="flex-item" id="answer">
+                <form method="POST" action="/quiz/<%= it.word.id %>/answer/<%= option.id %>">
+                    <button type="submit"> <%= option.word %></button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+
+<% } else { %>
+<div class="flex-container">
+    <div class="flex-item" id="question"><p> Tietokannassa ei ole tarpeeksi sanoja </p></div>        
+</div>
+<% } %>
+
+<div class="flex-container">
+    <div class="flex-item" id="next">
+        <a href="/quiz" class="paper-btn" id="next"> Uusi sana -> </a>
+    </div>
+</div>
+

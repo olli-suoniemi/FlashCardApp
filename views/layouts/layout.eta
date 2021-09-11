@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.2/dist/paper.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
+  <title>Слова</title>
+  <style>
+    
+    #words_form {
+      background-color: #eaffe3;
+      border-radius: 10px;
+      padding: 10px;
+      width: 400px;
+    }
+
+    .flex-container {
+      background-color: #eaffe3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #question {
+      margin: 5px 0;
+    }
+
+    #answer {
+      margin: 0 5px;
+    }
+
+    #next {
+      margin: 25px 0;
+    }
+
+    #change_of_category {
+      background-color: #eaffe3;
+      border-radius: 10px;
+      padding: 10px;
+      width: 200px;
+      float: right;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left:0;
+      width: 100%;
+      background-color: #d7fcc0;
+      color: black;
+      text-align: center;
+      height: 2.5rem;  
+    }
+
+    #page-container {
+      position: relative;
+      min-height: 100vh;
+    }
+
+    #content-wrap {
+      padding-bottom: 2.5rem;    /* Footer height */
+    }
+
+    body { 
+      font-family: 'Merriweather', serif; 
+      color: black; 
+      background-color: #e1ffcf;
+    }
+
+    p, a, h1, h2, h3, h4, h5, h6 { 
+      font-family: 'Merriweather', serif; 
+    }
+    
+  </style>
+
+  
+</head>
+<body>
+  
+  <div id="page-container">
+    <div id="content-wrap">
+      <nav class="border fixed split-nav">
+        <div class="nav-brand">
+          <h4><a href="/">Слова</a></h4>
+        </div>
+        <div class="collapsible">
+          <input id="collapsible1" type="checkbox" name="collapsible1">
+            <label for="collapsible1">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+            </label>
+            <div class="collapsible-body">
+              <% if (it.user) { %>
+              <ul class="inline">
+                <li><a href="/auth/logout">Kirjaudu ulos</a></li>
+              </ul>
+              <% }  else { %>
+              <ul class="inline">
+                <li><a href="/auth/login">Kirjaudu</a></li>
+              </ul>
+              <% } %>
+            </div>
+        </div>
+      </nav>
+
+      <div class="paper container">
+        <%~ it.body %>
+      </div>
+    </div>
+    <footer>
+      <p><span class="badge success">O S</span></p>
+    </footer>
+  </div>
+</body>
+</html>

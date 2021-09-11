@@ -1,0 +1,28 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1></h1>
+<form method="POST" action="/auth/register">
+    Käyttäjänimi:<br/>
+    <input type="text" name="username" value="<%= it.registrationData ? it.registrationData.username : "" %>"/><br/>
+    Salasana:<br/>
+    <input type="password" name="password" /><br/>
+    <input type="submit" value="Rekisteröidy" />
+</form>
+
+<% if (it.registrationData) { %>
+<ul>
+    <% Object.keys(it.registrationData.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.registrationData.validationErrors[attribute]).forEach((err) => { %>
+            <div class="row flex-spaces">
+                <input class="alert-state" id="<%=attribute%>" type="checkbox">
+                <div class="alert alert-danger dismissible">
+                    <%= err %>
+                    <label class="btn-close" for="<%=attribute%>">X</label>
+                </div>
+            </div>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
+Oletko jo rekisteröitynyt? Kirjaudu <a href="/auth/login">täällä</a>

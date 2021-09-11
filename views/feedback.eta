@@ -1,0 +1,24 @@
+<% layout('./layouts/layout.eta') %>
+<h1></h1>
+<% if (!it.check) { %>
+    
+    <div class="flex-container">
+        <div class="flex-item col-6 col"><button class="btn-block btn-danger-outline"> Väärä vastaus :( </button></div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-item"><button class="btn-default btn-primary-outline"> Oikea vastaus oli/ovat: <%= it.correct_answer %> </button></div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-item"><a href="/quiz" class="paper-btn" id="next"> Seuraava sana -> </a></div>        
+    </div>
+
+<% } else { %>
+
+    <div class="flex-container">
+        <div class="flex-item col-6 col"><button class="btn-block btn-success-outline"> Oikein, hienoa! </button></div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-item"><a href="/quiz" class="paper-btn" id="next"> Seuraava sana -> </a></div>        
+    </div>
+
+<% } %>

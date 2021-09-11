@@ -1,0 +1,86 @@
+<% layout("./layouts/layout.eta") %>
+
+<h3><ins>Sanat</ins></h3>
+
+<% if (it.words.finnish_words.length > 0 | it.words.russian_words.length > 0) { %>
+
+  <% it.words.finnish_words.forEach((element) => { %>
+    <a href="/words/<%= element.id %>" class="paper-btn"> <%= element.word %> </a>
+  <% }); %>
+  </br>
+  <% it.words.russian_words.forEach((element) => { %>
+    <a href="/words/<%= element.id %>" class="paper-btn"> <%= element.word %> </a>
+  <% }); %>
+
+
+<% } else { %>
+
+<p>Ei sanoja. Lisää uusia!</p>
+
+<% } %>
+
+<h3><ins>Lisää uusi sana!</ins></h3>
+
+
+<form id="words_form" method="POST" action="/words" autocomplete="off">
+  <fieldset class="form-group">
+  <label for="chapter_1.1" class="paper-radio">
+    <input type="radio" name="chapter" id="chapter_1.1" value="Kappale 1.1" checked> <span>Kappale 1.1</span>
+  </label>
+  <label for="chapter_1.2" class="paper-radio">
+    <input type="radio" name="chapter" id="chapter_1.2" value="Kappale 1.2"> <span>Kappale 1.2</span>
+  </label>
+  <label for="chapter_1.3" class="paper-radio">
+    <input type="radio" name="chapter" id="chapter_1.3" value="Kappale 1.3"> <span>Kappale 1.3</span>
+  </label>
+  <label for="chapter_1.4" class="paper-radio">
+    <input type="radio" name="chapter" id="chapter_1.4" value="Kappale 1.4"> <span>Kappale 1.4</span>
+  </label>
+  <label for="general" class="paper-radio">
+    <input type="radio" name="chapter" id="general" value="Yleinen"> <span>Yleinen</span>
+  </label>
+  </fieldset>
+
+  Sana:
+  </br>
+  <input type="text" list="words" name="word" style="display: inline;" autofocus>
+  <datalist id="words">
+    <% if (it.words) { %>
+      <% Object.keys(it.words).forEach((attribute) => { %>
+          <% Object.values(it.words[attribute]).forEach((word) => { %>
+              <option value="<%= word.word %>">
+          <% }) %>
+      <% }) %>
+    <% } %>
+  </datalist>
+  </br>
+  Vastaus:
+  </br>
+  <input type="text" list="words" name="answer" style="display: inline;">
+  <datalist id="words">
+    <% if (it.words) { %>
+      <% if (it.words.length > 0) { %>
+        <% it.words.forEach((element) => { %>
+        <option value="<%= element.word %>">
+      <% })}; %>
+    <% } %>
+  </datalist>
+
+  <input type="submit" value="Lisää pari" style="display: inline;">
+</form>
+
+<% if (it.wordData) { %>
+<ul>
+  <% Object.keys(it.wordData.validationErrors).forEach((attribute) => { %>
+      <% Object.values(it.wordData.validationErrors[attribute]).forEach((err) => { %>
+          <div class="row flex-spaces">
+              <input class="alert-state" id="<%=attribute%>" type="checkbox">
+              <div class="alert alert-danger dismissible">
+                  <%= err %>
+                  <label class="btn-close" for="<%=attribute%>">X</label>
+              </div>
+          </div>
+      <% }); %>
+  <% }); %>
+</ul>
+<% } %>

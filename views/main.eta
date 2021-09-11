@@ -1,0 +1,31 @@
+<% layout('./layouts/layout.eta') %>
+
+<% if (it.user) { %>
+
+    <h3><ins>Tervetuloa <%=it.user.username%></ins></h3>
+
+    <% if(it.user.roles.some(e => e.name === 'ADMIN')) { %>
+
+        <a href="/words"><h4>Tarkista sanat ja lisää uusia <-</h4></a>
+
+        <a href="/quiz"><h4>Testaa quizzia</h4></a>
+
+    <% } else { %>
+
+    <a href="/quiz"><h4>Aloita sanojen opiskelu -></h4></a>
+
+    <% } %>
+
+<% } else { %>
+
+    <h3><ins>Tervetuloa </ins></h3>
+
+    <a href="/auth/login"><h4>Kirjaudu</h4></a>
+
+    <a href="/auth/register"><h4>Rekisteröidy</h4></a>
+
+    <p> Tällä ohjelmalla avaat itsellesi venäjän kielen salat. Voit harjoitella ja opetella uusia venäjän sanoja helposti. </p>
+    <p> Jos olet jo rekisteröitynyt, kirjaudu sisään ja ryhdy hommiin. Muuten, voit rekisteröityä ylhäällä olevasta linkistä. </p>
+
+<% } %>
+
