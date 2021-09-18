@@ -24,7 +24,7 @@
     }
 
     #question {
-      margin: 5px 0 5px;
+      margin: 15px 0 25px;
     }
 
     #answer {
@@ -32,11 +32,19 @@
     }
 
     #next {
-      margin: 25px;
+      margin: 20px;
+    }
+
+    #correct {
+      margin: 80px;
+    }
+
+    #next_correct {
+      margin: 165px 0 25px;
     }
 
     #correct_answer_for_asked {
-      margin: 0 0 0;
+      margin: -10px 0 0;
     }
 
     #correct_answer_for_chosen {
@@ -46,7 +54,6 @@
     #check {
       margin: 0 0;
     }
-  
 
     #change_of_category {
       background-color: #eaffe3;

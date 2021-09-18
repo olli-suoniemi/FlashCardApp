@@ -1,6 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1></h1>
+<h3>Rekisteröityminen</h3>
 <form method="POST" action="/auth/register">
     Käyttäjänimi:<br/>
     <input type="text" name="username" value="<%= it.registrationData ? it.registrationData.username : "" %>"/><br/>

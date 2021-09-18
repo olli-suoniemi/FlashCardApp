@@ -3,7 +3,7 @@
 <% if (!it.check) { %>
     
     <div class="flex-container">
-        <div class="flex-item col-6 col"><button class="btn-block btn-danger-outline"> Väärä vastaus :( </button></div>
+        <div class="flex-item col-6 col"><button class="btn-block btn-danger-outline"> Väärin :( </button></div>
     </div>
     <div class="flex-container">
         <div class="flex-item" id="correct_answer_for_asked"><button class="btn-default btn-primary-outline"> Oikea vastaus oli: <ins><%= it.correct_answer %></ins> </button></div>
@@ -50,10 +50,10 @@
 <% } else { %>
 
     <div class="flex-container">
-        <div class="flex-item col-6 col"><button class="btn-block btn-success-outline"> Oikein, hienoa! </button></div>
+        <div class="flex-item col-6 col" id="correct"><button class="btn-block btn-success-outline" > Oikein! :)</button></div>
     </div>
     <div class="flex-container">
-        <div class="flex-item"><a href="/quiz" class="paper-btn" id="next"> Seuraava sana -> </a></div>        
+        <div class="flex-item"><a href="/quiz" class="paper-btn" id="next_correct"> Seuraava sana -> </a></div>        
     </div>
 
 <% } %>

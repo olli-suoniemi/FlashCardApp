@@ -6,13 +6,13 @@
 
     <% if(it.user.roles.some(e => e.name === 'ADMIN')) { %>
 
-        <a href="/words"><h4>Tarkista sanat ja lisää uusia <-</h4></a>
+        <a href="/words"><h4>Tarkista sanat ja lisää uusia </h4></a>
 
         <a href="/quiz"><h4>Testaa quizzia</h4></a>
 
     <% } else { %>
 
-    <a href="/quiz"><h4>Aloita sanojen opiskelu -></h4></a>
+    <a href="/quiz"><h4>Aloita sanojen opiskelu täältä</h4></a>
 
     <% } %>
 
