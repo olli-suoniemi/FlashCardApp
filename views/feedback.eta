@@ -1,13 +1,48 @@
 <% layout('./layouts/layout.eta') %>
-<h1></h1>
+</br>
 <% if (!it.check) { %>
     
     <div class="flex-container">
         <div class="flex-item col-6 col"><button class="btn-block btn-danger-outline"> Väärä vastaus :( </button></div>
     </div>
     <div class="flex-container">
-        <div class="flex-item"><button class="btn-default btn-primary-outline"> Oikea vastaus oli/ovat: <%= it.correct_answer %> </button></div>
+        <div class="flex-item" id="correct_answer_for_asked"><button class="btn-default btn-primary-outline"> Oikea vastaus oli: <ins><%= it.correct_answer %></ins> </button></div>
     </div>
+
+     <% if (it.user_answer.length > 1) { %>
+        <div class="flex-container">
+            <div class="flex-item" id="correct_answer_for_asked"><button class="btn-default"> Vastaukset sanalle <%= it.user_answer[0].word %> ovat: </button></div>
+        </div>
+        <% it.user_answer.forEach((element) => { %>
+        <div class="flex-container">
+            <div class="flex-item">
+                <button class="btn-default"> <%= element.answer %></button>
+            </div>
+        </div>
+        <% }) %>
+        
+    <% } else { %>
+        <div class="flex-container">
+            <div class="flex-item" id="correct_answer_for_chosen"><button class="btn-default"> Vastaus sanalle "<%= it.user_answer[0].word %>" on: "<%= it.user_answer[0].answer %>"</button></div>
+        </div>
+    <% } %>
+    
+    <% if (it.word.lang === 'rus') { %>
+        <div class="flex-container">
+            <div class="flex-item" id="check"><a target="_blank" rel="noopener noreferrer" href="//translate.google.fi/?hl=fi&sl=ru&tl=fi&text=<%=it.word.word%>&op=translate" class="paper-btn" > Tarkista Google Kääntäjällä sana: "<%= it.word.word %>" </a></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item"><a target="_blank" rel="noopener noreferrer" href="//translate.google.fi/?hl=fi&sl=fi&tl=ru&text=<%=it.user_answer[0].word%>&op=translate" class="paper-btn" > Tarkista Google Kääntäjällä sana: "<%= it.user_answer[0].word %>" </a></div>
+        </div>
+    <% } else { %>
+        <div class="flex-container">
+            <div class="flex-item" id="check"><a target="_blank" rel="noopener noreferrer" href="//translate.google.fi/?hl=fi&sl=fi&tl=ru&text=<%=it.word.word%>&op=translate" class="paper-btn" > Tarkista Google Kääntäjällä sana: "<%= it.word.word %>" </a></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item"><a target="_blank" rel="noopener noreferrer" href="//translate.google.fi/?hl=fi&sl=ru&tl=fi&text=<%=it.user_answer[0].word%>&op=translate" class="paper-btn" > Tarkista Google Kääntäjällä sana: "<%= it.user_answer[0].word %>" </a></div>
+        </div>
+    <% } %>
+
     <div class="flex-container">
         <div class="flex-item"><a href="/quiz" class="paper-btn" id="next"> Seuraava sana -> </a></div>        
     </div>

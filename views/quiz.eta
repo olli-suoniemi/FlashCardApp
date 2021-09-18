@@ -4,7 +4,7 @@
 <% if(it.word && it.options && it.options.length >= 1) { %>
 
     <div class="flex-container">
-        <div class="flex-item col-6 col" id="question"><button class="btn-block"> <%= it.word.word %></button></div>
+        <div class="flex-item col-6 col" id="question"><button class="btn-block"> <%= it.word.word %> </button></div>
     </div>
 
     <% it.options.forEach((option) => { %>

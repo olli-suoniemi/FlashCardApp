@@ -189,6 +189,23 @@ const getAnswerInfo = async (word_id) => {
   };
 };
 
+const editWord = async (word_id, new_word) => {
+  await executeQuery(
+    `UPDATE words
+      SET word = $1
+        WHERE id = $2`,
+          new_word, word_id
+  );
+};
+
+const editAnswer = async (new_answer, old_answer) => {
+  await executeQuery(
+    `UPDATE answers SET answer = $1
+      FROM words
+        WHERE words.id = answers.word_id AND answer = $2`,
+          new_answer, old_answer
+  );
+};
 
 export { 
   addWord,
@@ -206,5 +223,7 @@ export {
   getAnswers,
   getCategories,
   changeCategory,
-  getAnswerInfo
+  getAnswerInfo,
+  editWord,
+  editAnswer
 };

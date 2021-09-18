@@ -18,6 +18,7 @@ router.post("/words/:id/delete", wordController.deleteWord);
 
 router.post("/words/:id/addAnswer", wordController.addAnswer);
 router.post("/words/:id/changeCategory", wordController.changeCategory);
+router.post("/words/:id/editWord", wordController.editWord);
 
 router.get("/quiz", quizController.getRandomWord);
 router.post("/quiz/:id/answer/:answerId", quizController.checkAnswer);
@@ -29,5 +30,4 @@ router.get("/auth/login", loginController.showLoginForm);
 router.post("/auth/login", loginController.processLogin);
 
 router.get("/auth/logout", logoutController.logout);
-
 export { router };

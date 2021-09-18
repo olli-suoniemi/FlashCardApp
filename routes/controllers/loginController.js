@@ -55,6 +55,7 @@ const processLogin = async ({ request, response, state, render }) => {
         id: user.id,
         username: user.username,
         roles: rolesRes.flatMap((x) => x),
+        check: false
       });
       response.redirect("/");
   }  

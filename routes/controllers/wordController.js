@@ -11,6 +11,8 @@ const answerValidationRules = {
 
 const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 
+const latinPattern = (/[a-z]/i);
+
 const getWordData = async (request) => {
     const body = request.body({ type: "form" });
     const params = await body.value;
@@ -36,7 +38,7 @@ const capitalizeFirstLetter = async (word) => {
 
         /* ----------  ---------- */
 
-const addWord = async ({ request, response, render }) => {    // post /words
+const addWord = async ({ request, response, render, user }) => {    // post /words
     const wordData = await getWordData(request);
     
     let [passes, errors] = await validasaur.validate(
@@ -50,6 +52,7 @@ const addWord = async ({ request, response, render }) => {    // post /words
             wordData: wordData,
             words: await wordService.getAllWords() });
     } else {
+        user.check = wordData.category
         if (await wordService.checkIfWordExists(wordData.word.toLowerCase())) {
             // if word already exists, add only answer to this word
             if (wordData.answer) {  // (only if answer was submitted)
@@ -68,7 +71,8 @@ const addWord = async ({ request, response, render }) => {    // post /words
                 if (!found) {
                     // the word doesn't contain this answer, add it
                     wordData.answer = await capitalizeFirstLetter(wordData.answer);
-                    if (cyrillicPattern.test(wordData.answer)) {
+                    wordData.word = await capitalizeFirstLetter(wordData.word);
+                    if (!latinPattern.test(wordData.answer)) {
                         await wordService.addAnswer(res_word.id, wordData.answer, 'rus');
                         // add the answer also as a word
                         await wordService.addWord(wordData.answer, 'rus', wordData.category);
@@ -86,14 +90,13 @@ const addWord = async ({ request, response, render }) => {    // post /words
                         await wordService.addAnswer(res_word_ans.id, wordData.word, 'rus');
                     };
                 } else {    // the word contains this answer, redirect to /words
-                    console.log("uudelleenohjataan.... ->");
                     response.redirect("/words");
                 };
             };
         }   // else, add the word first, then check the situation of answers
         else {    
-            wordData.word = await capitalizeFirstLetter(wordData.word)
-            if (cyrillicPattern.test(wordData.word)) {
+            wordData.word = await capitalizeFirstLetter(wordData.word);
+            if (!latinPattern.test(wordData.word)) {
                 await wordService.addWord(wordData.word, "rus", wordData.category);
                 if (wordData.answer) {  // (if answer was submitted),
                     const res_word = await wordService.getWordByWord(wordData.word.toLowerCase());
@@ -140,9 +143,11 @@ const addWord = async ({ request, response, render }) => {    // post /words
     };
 };
 
-const getWords = async ({ render }) => {    // get /words
+const getWords = async ({ render, user }) => {    // get /words
+    console.log(user);
     render("words.eta", { 
-        words: await wordService.getAllWords(), 
+        words: await wordService.getAllWords(),
+        user: user 
     });
 };
 
@@ -150,25 +155,29 @@ const getWord = async ({ params, render }) => {     // get /words/:id
     const word_id = params.id
     const res = await wordService.getWordById(word_id);
     const answers = await wordService.getAnswers(word_id);
+    const correct_answers =  await wordService.getAnswers(word_id);
     let list_of_answers = []
     
     answers.forEach(element => {
         element.answer = " " + element.answer
         list_of_answers.push(element.answer)
     });
+    
     if (res.lang === 'fin') {
         render("word.eta", { 
             word: await wordService.getWordById(word_id),
             words: await wordService.getRussianOptions(res.word.toLowerCase()),
             list_of_answers: list_of_answers,
-            categories: await wordService.getCategories()
+            categories: await wordService.getCategories(),
+            correct_answers: correct_answers
         });
     } else {
         render("word.eta", { 
             word: await wordService.getWordById(word_id),
             words: await wordService.getFinnishOptions(res.word.toLowerCase()),
             list_of_answers: list_of_answers,
-            categories: await wordService.getCategories()
+            categories: await wordService.getCategories(),
+            correct_answers: correct_answers
         });
     };
 };
@@ -233,6 +242,7 @@ const addAnswer = async ({ params, response, request, render }) => {     // post
     } else {
 
         answerData.answer = await capitalizeFirstLetter(answerData.answer);
+        wordData.word = await capitalizeFirstLetter(wordData.word);
 
         const word_id = params.id;
 
@@ -251,16 +261,29 @@ const addAnswer = async ({ params, response, request, render }) => {     // post
     };
 };
 
-const changeCategory = async ({ response, request, render, params }) => {   // post /words/:id/changeCategory
+const changeCategory = async ({ response, request, params }) => {   // post /words/:id/changeCategory
     const body = request.body({ type: "form" });
     const form_params = await body.value;
-    const category = form_params.get("category")
+    const category = form_params.get("category");
     if (category) {
-        wordService.changeCategory(params.id, category)
+        wordService.changeCategory(params.id, category);
     } 
-    response.redirect(`/words/${params.id}`)
-    
-}
+    response.redirect(`/words/${params.id}`);
+};
+
+const editWord = async ({ response, request, params }) => {     // post /words/:id/editWord
+    const body = request.body({ type: "form" });
+    const form_params = await body.value;
+    let new_word = form_params.get("word");
+    if (new_word) {
+        let old_word = await wordService.getWordById(params.id);
+        new_word = await capitalizeFirstLetter(new_word);
+        old_word = await capitalizeFirstLetter(old_word.word);
+        await wordService.editAnswer(new_word, old_word);
+        await wordService.editWord(params.id, new_word);
+    };
+    response.redirect(`/words/${params.id}`);
+};
 
 export { 
     addWord, 
@@ -268,5 +291,6 @@ export {
     getWord,
     deleteWord,
     addAnswer,
-    changeCategory
+    changeCategory,
+    editWord,
 };

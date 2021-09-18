@@ -41,6 +41,7 @@ const checkAnswer = async ({ params, render }) => {
     let feedback_answer = correct_answer[0].answer;
     let list_of_answers = [];
     
+    
     if (correct_answer.length > 1) {
         for(var i = 0; i < correct_answer.length; i++) {
             let ele = " " + correct_answer[i].answer;
@@ -56,10 +57,12 @@ const checkAnswer = async ({ params, render }) => {
             check = true;
         };
     };
-    
+    const word = await wordService.getWordById(params.id)
     render("feedback.eta", {
         check: check,
-        correct_answer: feedback_answer
+        correct_answer: feedback_answer,
+        user_answer: user_answer,
+        word: word
     });
 };
 

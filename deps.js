@@ -11,3 +11,4 @@ export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 export * as validasaur from "https://deno.land/x/validasaur@v0.15.0/mod.ts";
 export { superoak } from "https://deno.land/x/superoak@4.3.0/mod.ts";
 export { assertMatch, assertEquals } from "https://deno.land/std@0.100.0/testing/asserts.ts";
+export * from "https://deno.land/x/dotenv@v2.0.0/load.ts";

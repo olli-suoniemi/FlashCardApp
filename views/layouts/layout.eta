@@ -24,16 +24,29 @@
     }
 
     #question {
-      margin: 5px 0;
+      margin: 5px 0 5px;
     }
 
     #answer {
-      margin: 0 5px;
+      margin: 0;
     }
 
     #next {
-      margin: 25px 0;
+      margin: 25px;
     }
+
+    #correct_answer_for_asked {
+      margin: 0 0 0;
+    }
+
+    #correct_answer_for_chosen {
+      margin: 0 0 15px;
+    }
+
+    #check {
+      margin: 0 0;
+    }
+  
 
     #change_of_category {
       background-color: #eaffe3;
@@ -64,13 +77,11 @@
     }
 
     body { 
-      font-family: 'Merriweather', serif; 
       color: black; 
       background-color: #e1ffcf;
     }
 
     p, a, h1, h2, h3, h4, h5, h6 { 
-      font-family: 'Merriweather', serif; 
     }
     
   </style>

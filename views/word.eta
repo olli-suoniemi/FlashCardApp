@@ -40,6 +40,16 @@
 
 </br>
 
+<form method="POST" action="/words/<%= it.word.id %>/editWord" autocomplete="off">
+  <input type="text" list="word" name="word" style="display: inline;" >
+  <datalist id="word">
+    <option value="<%= it.word.word %>">
+  </datalist>
+  <input type="submit" value="Muokkaa sanaa" style="display: inline;">
+</form>
+
+</br>
+
 <% if (it.list_of_answers && it.list_of_answers.length > 0) { %>
   <form method="POST" action="/words/<%= it.word.id %>/delete">
     <input type="hidden" name="_method" value="DELETE"> 
