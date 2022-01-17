@@ -1,6 +1,6 @@
 <h1> App for studying words / FlashCardApp </h1>
 
-This app can be used for creating quizzes from your own created words. This tool is handy for teachers and students who are looking for a easy way to create flashcards out of your own words. On the first version of the app only the admin has the control of creating new words and deleting them. Later that ability may be allowed for all. 
+This app can be used for creating quizzes from your own created words. This tool is handy for teachers and students who are looking for a easy way to create flashcards out of your own words. On the current version of the app only the admin has the control of creating new words and deleting them. Later though the ability may be allowed for all. 
 
 The main reason this app was built was the need for a tool to learn new languages. My aim is to use this in my Russian studies to help me learn new words and 
 phrases. This is a traditional stylish "flashcard" app which can be used for basic word quizzing.
