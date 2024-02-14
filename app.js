@@ -16,4 +16,10 @@ app.use(serveStaticMiddleware);
 app.use(renderMiddleware);
 app.use(router.routes());
 
+if (import.meta.main) {
+  const port = Deno.env.get("PORT") || 7777;
+  console.log(`Starting server on port ${port}`);
+  await app.listen({ port: Number(port) });
+}
+
 export { app };

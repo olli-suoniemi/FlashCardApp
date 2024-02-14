@@ -9,14 +9,16 @@ The second reason for this app, was to develop and improve web development skill
 
 ---
 
-The app can be tested online in [here](https://learning-flashcardapp.herokuapp.com/)
+The app can be tested online in [here](https://flashcardapplication.fly.dev/)
 
 ---
 
 <h2> Local testing </h2>
 
-Use the database table statements below to create needed tables to run the program. Also remember to insert your database credentials.
-In order to run the program locally you have to install Deno. [Installation guidelines for Deno](https://deno.land/manual/getting_started/installation). <br>Use version 1.11.5. You can set it by command: <code> deno upgrade --version 1.11.5 </code><br>
+Use the db commands below to create the needed tables to run the program. Then create a .env file and insert your database url into
+a DATABASE_URL variable.
+
+In order to run the program locally you have to install Deno. [Installation guidelines for Deno](https://deno.land/manual/getting_started/installation).
 
 ---
 
